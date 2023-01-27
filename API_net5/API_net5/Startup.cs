@@ -1,4 +1,5 @@
 ﻿using API_net5.Data;
+using API_net5.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,6 +38,10 @@ namespace API_net5
             {
                 option.UseSqlServer(Configuration.GetConnectionString("MyDB"));
             });
+
+            //services.AddScoped<ILoaiRepository, LoaiRepository>();
+            services.AddScoped<ILoaiRepository, LoaiRepositoryInMemory>();
+
             var secretKey = Configuration["AppSettings:SecretKey"];
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
