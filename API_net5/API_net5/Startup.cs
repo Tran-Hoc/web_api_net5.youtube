@@ -1,4 +1,5 @@
 ﻿using API_net5.Data;
+using API_net5.Model;
 using API_net5.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +42,8 @@ namespace API_net5
 
             //services.AddScoped<ILoaiRepository, LoaiRepository>();
             services.AddScoped<ILoaiRepository, LoaiRepositoryInMemory>();
-
+            services.AddScoped<IHangHoaRepository, HangHoaRepository>();
+            services.Configure<AppSetting>(Configuration.GetSection("AppSettings"));
             var secretKey = Configuration["AppSettings:SecretKey"];
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
